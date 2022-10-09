@@ -48,7 +48,7 @@ jobs:
       - name: Publish Helm charts
         uses: stefanprodan/helm-gh-pages@master
         with:
-          charts_dir: .
+          charts_dir: ./Helm
           branch: main
           linting: off
           charts_url: https://agbusko.github.io/wordpress/
