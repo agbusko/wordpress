@@ -3,7 +3,7 @@ replicaCount: 2
 image:
   repository: agbusko/wordpress
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v0.0.2"
+  tag: "v0.0.8"
 
 service:
   type: ClusterIP
