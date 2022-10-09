@@ -32,4 +32,4 @@ jobs:
         with:
           context: ./Docker
           push: true
-          tags: agbusko/drupal:${{ steps.tag_version.outputs.new_tag }}
+          tags: agbusko/wordpress:${{ steps.tag_version.outputs.new_tag }}
