@@ -55,3 +55,14 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           app_version: ${{ steps.tag_version.outputs.new_tag }}
           chart_version: ${{ steps.tag_version.outputs.new_tag }}
+          
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_CHANNEL: my-monitoring
+          SLACK_COLOR: ${{ job.status }}
+          SLACK_ICON: https://avatars.githubusercontent.com/u/43742164?s=32&v=4
+          SLACK_MESSAGE: 'A new version of the project has been released'
+          SLACK_TITLE: 'Good job!'
+          SLACK_USERNAME: agent
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
