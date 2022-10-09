@@ -33,3 +33,25 @@ jobs:
           context: ./Docker
           push: true
           tags: agbusko/wordpress:${{ steps.tag_version.outputs.new_tag }}
+          
+      - name: Helm tool
+        uses: Azure/setup-helm@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Test manifests
+        continue-on-error: true
+        uses: instrumenta/kubeval-action@master
+        with: 
+          files: ./wordpress/templates
+          
+      - name: Publish Helm charts
+        uses: stefanprodan/helm-gh-pages@master
+        with:
+          charts_dir: .
+          branch: main
+          linting: off
+          charts_url: https://agbusko.github.io/wordpress/
+          token: ${{ secrets.GITHUB_TOKEN }}
+          app_version: ${{ steps.tag_version.outputs.new_tag }}
+          chart_version: ${{ steps.tag_version.outputs.new_tag }}
